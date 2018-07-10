@@ -1,0 +1,182 @@
+@import "body.less";
+/*
+@import(参数)
+once : 默认，只包含一次;
+reference：使用less文件但不输出
+inline : 原样输出包含源文件但不能使用变量等less特性;
+less,css :强制作为less css 文件对象;
+ */
+#import{
+	width: @wp;
+}
+/*嵌套规则*/
+
+#header{ 
+	color:black;
+	.navigation{
+		font-size: 12px;
+		.cos &{
+			color:#fff;
+		}
+	} 
+	.logo{
+		width:300px;
+		&:hover{
+			text-decoration: none;
+		}
+	}
+}
+
+p, a, ul, li{
+	border: 1px solid #ccc;
+	& &{  //会有16种
+		color:blue;
+	}
+}
+//当&符号在选择器之后就会将父元素插在选择器之后
+
+
+
+/*选择器*/
+.bordered{
+	&.float{
+		float:left;
+	}
+
+	.top{
+		margin: 5px;
+	}
+}
+
+/*运算*/
+@base:5%;
+@filter: @base * 2;
+@other: @base + @filter;
+
+.class1{
+	color:#888 / 4;
+	background: #a4a4a4+#111;
+	height: 100% / 2 + @filter;
+}
+
+/*less的运算可以分辨颜色和单位*/
+@var:1px + 5;
+@width:(@var + 5)*2;
+
+.class2{
+	width: @width;
+	border: (@var - 4) solid black;
+	color:#000000+ 21;
+	color-2:#ff0000 - 55;
+}
+//rgb下的值是(0-255) 当你的值超过255会以255计算
+
+/*Color函数*/
+
+@base:#fff;
+
+.class3{
+	color:saturate(@base, 10%);
+}
+
+/*Math函数
+round(1.67); //返回2
+ceil(2.4); //返回3
+floor(2.6); //返回2
+percentage(0.5) //50%
+*/
+/*命名空间*/
+#bundle {
+  .button () {
+    display: block;
+    border: 1px solid black;
+    background-color: grey;
+    &:hover { background-color: white }
+  }
+}
+ #header a {
+  color: orange;
+  #bundle > .button;
+}
+#button{
+	#bundle .button
+}
+
+/*函数*/
+.wp{
+	background: rgb(255,0,0);
+	width: @wp;
+}
+
+/*when 条件表达式
+ iscolor()
+ isnumber()
+ isstring()
+ iskeyword()
+ isurl()
+ ispixel()
+ ispercentage()
+ isem()
+ isunit()
+*/
+.color(@color) when(iscolor(@color)){
+	width: 100px;
+}
+.color(@color) when(isnumber(@color)){
+	width: 200px;
+}
+
+.class8{
+	.color(#ff0000)
+}
+.class9{
+	.color(999)
+}
+
+/*循环*/
+.loop(@counter) when (@counter>0){
+   .h@{counter}{
+   	padding: (10px * @counter)
+   }
+   .loop(@counter - 1)
+}
+
+div{
+	.loop(5)
+}
+
+/*合并属性*/
+
+//用+合并后，以逗号分割属性
+.hebin(){
+	background+:inset 0 0 10px #555; 
+}
+.myclass{
+	.hebin();
+	background+:0 0 20px black; 
+}
+
+//用+_合并，以空格分割属性值
+.hebin_(){
+	background+_:#666;
+	background+_:url('ss.jpg') 
+}
+.myclass1{
+	.hebin_;
+}
+
+/*函数库*/
+.x(1){x:22;}
+.x(2){y:3;}
+.x(@a) when(default()){
+	y:@a;
+}
+.div1{
+	.x(1);
+	.x(123);
+}
+
+/*转义*/
+.div{
+	d:escape(123=abb);
+}

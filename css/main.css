@@ -1,0 +1,152 @@
+/*
+@import(参数)
+once : 默认，只包含一次;
+reference：使用less文件但不输出
+inline : 原样输出包含源文件但不能使用变量等less特性;
+less,css :强制作为less css 文件对象;
+ */
+#import {
+  width: 500px;
+}
+/*嵌套规则*/
+#header {
+  color: black;
+}
+#header .navigation {
+  font-size: 12px;
+}
+.cos #header .navigation {
+  color: #fff;
+}
+#header .logo {
+  width: 300px;
+}
+#header .logo:hover {
+  text-decoration: none;
+}
+p,
+a,
+ul,
+li {
+  border: 1px solid #ccc;
+}
+p p,
+p a,
+p ul,
+p li,
+a p,
+a a,
+a ul,
+a li,
+ul p,
+ul a,
+ul ul,
+ul li,
+li p,
+li a,
+li ul,
+li li {
+  color: blue;
+}
+/*选择器*/
+.bordered.float {
+  float: left;
+}
+.bordered .top {
+  margin: 5px;
+}
+/*运算*/
+.class1 {
+  color: #222222;
+  background: #b5b5b5;
+  height: #ffffff;
+}
+/*less的运算可以分辨颜色和单位*/
+.class2 {
+  width: 22px;
+  border: 2px solid #000000;
+  color: #151515;
+  color-2: #c80000;
+}
+/*Color函数*/
+.class3 {
+  color: #ffffff;
+}
+/*Math函数
+round(1.67); //返回2
+ceil(2.4); //返回3
+floor(2.6); //返回2
+percentage(0.5) //50%
+*/
+/*命名空间*/
+#header a {
+  color: orange;
+  display: block;
+  border: 1px solid black;
+  background-color: grey;
+}
+#header a:hover {
+  background-color: #ffffff;
+}
+#button {
+  display: block;
+  border: 1px solid black;
+  background-color: grey;
+}
+#button:hover {
+  background-color: #ffffff;
+}
+/*函数*/
+.wp {
+  background: #ff0000;
+  width: 500px;
+}
+/*when 条件表达式
+ iscolor()
+ isnumber()
+ isstring()
+ iskeyword()
+ isurl()
+ ispixel()
+ ispercentage()
+ isem()
+ isunit()
+*/
+.class8 {
+  width: 100px;
+}
+.class9 {
+  width: 200px;
+}
+/*循环*/
+div .h5 {
+  padding: 50px;
+}
+div .h4 {
+  padding: 40px;
+}
+div .h3 {
+  padding: 30px;
+}
+div .h2 {
+  padding: 20px;
+}
+div .h1 {
+  padding: 10px;
+}
+/*合并属性*/
+.myclass {
+  background: inset 0 0 10px #555, 0 0 20px black;
+}
+.myclass1 {
+  background: #666 url('ss.jpg');
+}
+/*函数库*/
+.div1 {
+  x: 22;
+  y: 123;
+}
+/*转义*/
+.div {
+  d: %5Bobject%20Object%5D;
+}

@@ -1,0 +1,90 @@
+.content ul {
+  list-style: none;
+}
+.content li {
+  line-height: 1.6;
+}
+.content li a {
+  color: blue;
+  text-decoration: none;
+}
+/*普通混合,会输出到css中充当一个class*/
+.mix-one {
+  background: #000;
+}
+/*不带输出的混合,不会输出到css中*/
+/*带选择器的混合*/
+.my-hover-mixin:hover {
+  border: 1px solid red;
+}
+/*带参数的混合*/
+/*带参数并有默认值的混合*/
+/*带多个参数的混合,参数最好用分号隔开*/
+/*如果传参的括号里面全部都是以逗号隔开，那么会依次传给各参数值*/
+/*如果传参的括号里面有分号 则把分号前的作为一个参数*/
+.mixin {
+  color: red;
+  background: #000;
+}
+.mixin h2:hover {
+  border: 1px solid red;
+}
+.mixin:hover {
+  background: #0000ff;
+}
+.pick {
+  border: 4px dashed #ffff00;
+}
+.pick-me {
+  border: 1px solid #ff0000;
+}
+/*具有多个相同名称和参数数量的混合*/
+.iam-multiply {
+  color-1: #000000;
+  color-2: #000000;
+  padding-2: 2px;
+}
+/*最终只会输出到第二个定义的*/
+/*命名参数*/
+.hey {
+  background: #0000ff;
+  padding: 10px;
+  margin: 10px;
+}
+.hey h2 {
+  background: #ffff00;
+  padding: 20px;
+  margin: 20px;
+}
+/*指定参数位置没影响*/
+/*@arguments*/
+.class1 {
+  border: 10px dashed #0000ff;
+}
+.class2 {
+  border: 20px dashed #0000ff;
+}
+/*匹配模式*/
+.class3 {
+  color: #a2a2a2;
+  display: block;
+}
+.class4 {
+  color: #4d4d4d;
+  display: block;
+}
+/*混合的返回值*/
+.class5 {
+  padding: 25px;
+  margin: 50px;
+}
+/*导引*/
+.class6 {
+  background: black;
+  color: #dddddd;
+}
+.class7 {
+  background: red;
+  color: #555555;
+}
+

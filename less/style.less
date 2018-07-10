@@ -1,0 +1,160 @@
+@content-width:1000px;
+@content-height:20px;
+@content-background:blue;
+
+.content{
+	ul{
+		list-style: none;
+	}
+    li{
+    	line-height: 1.6;
+    	a{
+    		color:blue;
+    		text-decoration: none;
+    	}
+    }
+}
+/*普通混合,会输出到css中充当一个class*/
+.mix-one{
+    background: #000;
+}
+/*不带输出的混合,不会输出到css中*/
+.my-mixin(){
+    color:red;
+}
+/*带选择器的混合*/
+.my-hover-mixin{
+    &:hover{
+        border: 1px solid red;
+    }
+}
+/*带参数的混合*/
+.background(@color){
+    background: @color;
+}
+
+/*带参数并有默认值的混合*/
+.border_you(@color:red){
+    border: 4px dashed @color;
+};
+/*带多个参数的混合,参数最好用分号隔开*/
+.multiply(@px:1px; @type:solid; @color:red){
+   border: @px @type @color;
+}
+/*如果传参的括号里面全部都是以逗号隔开，那么会依次传给各参数值*/
+/*如果传参的括号里面有分号 则把分号前的作为一个参数*/
+.mixin{
+    .my-mixin;
+    .mix-one;
+    h2{
+        .my-hover-mixin;
+    }
+    &:hover{
+        .background(blue)
+    }
+}
+
+.pick{
+    .border_you(yellow);
+}
+
+.pick-me{
+    .multiply()
+}
+
+/*具有多个相同名称和参数数量的混合*/
+
+.mix-multiply(@color){
+    color-1:@color;
+}
+.mix-multiply(@color;@padding: 2px){
+    color-2:@color;
+    padding-2:@padding;
+}
+.mix-multiply(@color;@padding;@margin:2px){
+    color-3:@color;
+    padding-3:@padding;
+    margin: @margin; 
+}
+
+.iam-multiply{
+    .mix-multiply(#000)
+}
+
+/*最终只会输出到第二个定义的*/
+//
+/*命名参数*/
+
+.nameParam(@color:red;@padding:10px;@margin:20px){
+      background: @color;
+      padding: @padding;
+      margin:@margin;
+}
+
+.hey{
+    .nameParam(blue;@margin:10px);
+    h2{
+        .nameParam(@padding:20px;@color:yellow)
+    }
+}
+/*指定参数位置没影响*/
+
+/*@arguments*/
+.agms(@width:10px;@stype:dashed;@color:blue){
+    border: @arguments;
+}
+.class1{
+    .agms;
+}
+.class2{
+    .agms(20px)
+}
+
+/*匹配模式*/
+.pipei(dark,@color){
+    color: darken(@color,10%)
+}
+.pipei(light,@color){
+    color: lighten(@color,10%)
+}
+.pipei(@_,@color){
+    display: block;
+}
+
+.class3{
+    .pipei(light,#888)
+}
+.class4{
+    .pipei(dark,#666)
+}
+
+/*混合的返回值*/
+.average(@x,@y){
+    @average:((@x+@y)/2);
+    @he:(@x+@y);
+}
+.class5{
+    .average(20px,30px);
+    padding:@average;
+    margin:@he;
+}
+
+/*导引*/
+.mixbox(@color) when (lightness(@color)>=50%){
+    background: black;
+}
+
+.mixbox(@color) when (lightness(@color)<50%){
+    background: red;
+} 
+.mixbox(@color){
+    color:@color;
+}
+
+.class6{
+    .mixbox(#ddd)
+}
+.class7{
+    .mixbox(#555)
+}
+
